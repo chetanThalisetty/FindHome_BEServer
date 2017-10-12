@@ -8,6 +8,7 @@ module.exports = {
     "USER": {
         "tableName" : "userinfo",
         "columnName" : {
+            "ID": "userID",
             "fName":"firstName",
             "lName":"lastName",
             "email":"email",
