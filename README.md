@@ -1,7 +1,7 @@
 # FindHome_BEServer
 Backend server for FindHome
 
-# Pre-requisities
+#Pre-requisities
 
 1) Install Node.js
 2) Open command prompt and change the working directory to project
