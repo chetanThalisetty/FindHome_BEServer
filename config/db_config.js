@@ -15,7 +15,7 @@
 module.exports = {
     "host": 'localhost',
     "user": 'root',
-    "password": '',
-    "database": 'findhome',
+    "password": '6672164781',
+    "database": 'findHome',
     "connectionLimit": 100
 };

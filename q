@@ -1,0 +1,41 @@
+[33mcommit 7c254d3fcf67fd255330ae0f7bf47a3ef9120521[m
+Author: chetanThalisetty <tchetan1@umbc.edu>
+Date:   Thu Oct 12 20:13:41 2017 -0400
+
+    Updated Pre-requisites in ReadME
+
+[33mcommit ba12efd846d3f1e8d04b74f8f28d9d54460cb047[m
+Author: chetanThalisetty <tchetan1@umbc.edu>
+Date:   Thu Oct 12 20:07:56 2017 -0400
+
+    Updated Read Me file
+
+[33mcommit cce939c8c0d7a1254d48f5a85fc175c3dd7c38aa[m
+Author: chetanThalisetty <tchetan1@umbc.edu>
+Date:   Thu Oct 12 20:06:02 2017 -0400
+
+    --amend
+
+[33mcommit 5f6941247abea5106f052d37c01c3b0a5212a647[m
+Author: chetanThalisetty <tchetan1@umbc.edu>
+Date:   Thu Oct 12 20:03:07 2017 -0400
+
+    Updated ReadME file
+
+[33mcommit 3d674cd3b94a63b0645d3ae837e69a3e9ede4976[m
+Author: chetanThalisetty <tchetan1@umbc.edu>
+Date:   Thu Oct 12 19:55:23 2017 -0400
+
+    Implemented create table lib, User table creation and entry addition
+
+[33mcommit ff4f86862ab69b990066a9ecf584ba37706e1e62[m
+Author: chetanThalisetty <tchetan1@umbc.edu>
+Date:   Wed Oct 11 22:25:49 2017 -0400
+
+    initial libraries to use
+
+[33mcommit e941e2d024e9c6fb7a6c01dbe1b6aa8a10bdf99d[m
+Author: chetanThalisetty <tchetan1@umbc.edu>
+Date:   Wed Oct 11 22:16:50 2017 -0400
+
+    Initial commit
