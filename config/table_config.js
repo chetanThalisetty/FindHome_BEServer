@@ -45,58 +45,66 @@ module.exports = {
         "FOREIGN KEY(" + tInfo.CITY.columnName.COUNTRY_ID + ") REFERENCES "+ tInfo.COUNTRY.tableName + "(" + tInfo.COUNTRY.columnName.ID + ")," +
         "FOREIGN KEY(" + tInfo.CITY.columnName.STATE_ID + ") REFERENCES "+ tInfo.STATE.tableName + "(" + tInfo.STATE.columnName.ID +"))"
     },
+    "ADDRESS":{
+        "tableName" : tInfo.ADDRESS.tableName,
+        "tableCreationQuery": "CREATE TABLE " + tInfo.ADDRESS.tableName +
+                                " ("+ tInfo.ADDRESS.columnName.ID + " VARCHAR(255) NOT NULL," +
+                                tInfo.ADDRESS.columnName.NAME + " VARCHAR(255) NOT NULL," +
+                                "PRIMARY KEY(" + tInfo.ADDRESS.columnName.ID + "))"
+    },
     "HOST":{
         "tableName" : tInfo.HOST.tableName,
         "tableCreationQuery": "CREATE TABLE " + tInfo.HOST.tableName +
-        " ("+ tInfo.HOST.columnName.ID + " VARCHAR(255) NOT NULL," +
-        tInfo.HOST.columnName.NAME + " VARCHAR(255) NOT NULL," +
-        tInfo.HOST.columnName.LOCATION + " TEXT," +
-        tInfo.HOST.columnName.ABOUT + " TEXT," +
-        tInfo.HOST.columnName.RESPONSE_TIME + " VARCHAR(255)," +
-        tInfo.HOST.columnName.RESPONSE_RATE + " VARCHAR(10)," +
-        tInfo.HOST.columnName.IS_SUPERHOST + " VARCHAR(5)," +
-        tInfo.HOST.columnName.THUMBNAIL_URL + " TEXT," +
-        tInfo.HOST.columnName.PICTURE_URL + " TEXT," +
-        tInfo.HOST.columnName.HAS_PROFILE_PIC + " VARCHAR(5)," +
-        tInfo.HOST.columnName.IS_IDENTITY_VERIFIED + " VARCHAR(5)," +
-        "PRIMARY KEY(" + tInfo.HOST.columnName.ID +"))"
+                                " ("+ tInfo.HOST.columnName.ID + " VARCHAR(255) NOT NULL," +
+                                tInfo.HOST.columnName.NAME + " VARCHAR(255) NOT NULL," +
+                                tInfo.HOST.columnName.LOCATION + " TEXT," +
+                                tInfo.HOST.columnName.ABOUT + " TEXT," +
+                                tInfo.HOST.columnName.RESPONSE_TIME + " VARCHAR(255)," +
+                                tInfo.HOST.columnName.RESPONSE_RATE + " VARCHAR(10)," +
+                                tInfo.HOST.columnName.IS_SUPERHOST + " VARCHAR(5)," +
+                                tInfo.HOST.columnName.THUMBNAIL_URL + " TEXT," +
+                                tInfo.HOST.columnName.PICTURE_URL + " TEXT," +
+                                tInfo.HOST.columnName.HAS_PROFILE_PIC + " VARCHAR(5)," +
+                                tInfo.HOST.columnName.IS_IDENTITY_VERIFIED + " VARCHAR(5)," +
+                                "PRIMARY KEY(" + tInfo.HOST.columnName.ID +"))"
     },
     "HOUSE": {
-        "tableName" : "houseInfo",
-        "tableCreationQuery":"CREATE TABLE houseInfo (house_id VARCHAR(255) NOT NULL, " +
-                                                        "name VARCHAR(2048) NOT NULL," +
-                                                        "summary VARCHAR(2048)," +
-                                                        "space VARCHAR(2048)," +
-                                                        "description VARCHAR(2048)," +
-                                                        "house_rules VARCHAR(2048)," +
-                                                        "host_id VARCHAR(255)," +
-                                                        "address_id VARCHAR(255)," +
-                                                        "city_id VARCHAR(255)," +
-                                                        "state_id VARCHAR(255)," +
-                                                        "zipcode INT(7)," +
-                                                        "country_id VARCHAR(255)," +
-                                                        "latitude FLOAT(13,10)," +
-                                                        "longitude FLOAT(13,10)," +
-                                                        "property_type VARCHAR(255)," +
-                                                        "room_type VARCHAR(255)," +
-                                                        "accommodates INT(7)," +
-                                                        "bathrooms INT(7)," +
-                                                        "bedrooms INT(7)," +
-                                                        "beds INT(7)," +
-                                                        "bed_type VARCHAR(255)," +
-                                                        "amenities VARCHAR(2048)," +
-                                                        "price INT(255)," +
-                                                        "security_deposit INT(255)," +
-                                                        "guests_included INT(255)," +
-                                                        "extra_people INT(255)," +
-                                                        "minimum_nights INT(255)," +
-                                                        "maximum_nights INT(255)," +
-                                                        "cancellation_policy VARCHAR(255)," +
-                                                        "PRIMARY KEY(houseId)"+
-                                                        "FOREIGN KEY(host_id) REFERENCES hostInfo(host_id)," +
-                                                        "FOREIGN KEY(address_id) REFERENCES addressInfo(address_id)," +
-                                                        "FOREIGN KEY(city_id) REFERENCES cityInfo(city_id)," +
-                                                        "FOREIGN KEY(state_id) REFERENCES stateInfo(state_id)" +
-                                                        "FOREIGN KEY(country_id) REFERENCES countryInfo(country_id))"
+        "tableName" : tInfo.HOUSE.tableName,
+        "tableCreationQuery":"CREATE TABLE " + tInfo.HOUSE.tableName +
+                                " ("+ tInfo.HOUSE.columnName.ID + " VARCHAR(255) NOT NULL, " +
+                                tInfo.HOUSE.columnName.NAME + " TEXT," +
+                                tInfo.HOUSE.columnName.SUMMARY + " TEXT," +
+                                tInfo.HOUSE.columnName.SPACE + " TEXT," +
+                                tInfo.HOUSE.columnName.DESCRIPTION + " TEXT," +
+                                tInfo.HOUSE.columnName.RULES + " TEXT," +
+                                tInfo.HOUSE.columnName.HOST_ID + " VARCHAR(255) NOT NULL," +
+                                tInfo.HOUSE.columnName.ADDRESS_ID + " VARCHAR(255) NOT NULL," +
+                                tInfo.HOUSE.columnName.CITY_ID + " VARCHAR(255) NOT NULL," +
+                                tInfo.HOUSE.columnName.STATE_ID + " VARCHAR(255) NOT NULL," +
+                                tInfo.HOUSE.columnName.ZIPCODE + " INT(7)," +
+                                tInfo.HOUSE.columnName.COUNTRY_ID + " VARCHAR(255) NOT NULL," +
+                                tInfo.HOUSE.columnName.LATITUDE + " FLOAT(13,10)," +
+                                tInfo.HOUSE.columnName.LONGITUDE + " FLOAT(13,10)," +
+                                tInfo.HOUSE.columnName.PROPERTY_TYPE + " VARCHAR(255)," +
+                                tInfo.HOUSE.columnName.ROOM_TYPE + " VARCHAR(255)," +
+                                tInfo.HOUSE.columnName.ACCOMMODATES + " INT(7)," +
+                                tInfo.HOUSE.columnName.BATHROOMS + " INT(7)," +
+                                tInfo.HOUSE.columnName.BEDROOMS + " INT(7)," +
+                                tInfo.HOUSE.columnName.BEDS + " INT(7)," +
+                                tInfo.HOUSE.columnName.BED_TYPE + " VARCHAR(255)," +
+                                tInfo.HOUSE.columnName.AMENITIES + " TEXT," +
+                                tInfo.HOUSE.columnName.PRICE + " INT(255)," +
+                                tInfo.HOUSE.columnName.SECURITY_DEPOSIT + " INT(255)," +
+                                tInfo.HOUSE.columnName.GUESTS_INCLUDED + " INT(255)," +
+                                tInfo.HOUSE.columnName.EXTRA_PEOPLE + " INT(255)," +
+                                tInfo.HOUSE.columnName.MINIMUM_NIGHTS + " INT(255)," +
+                                tInfo.HOUSE.columnName.MAXIMUM_NIGHTS + " INT(255)," +
+                                tInfo.HOUSE.columnName.CANCELLATION_POLICY + " VARCHAR(255)," +
+                                "PRIMARY KEY("+ tInfo.HOUSE.columnName.ID +"),"+
+                                "FOREIGN KEY(" + tInfo.HOUSE.columnName.HOST_ID + ") REFERENCES "+ tInfo.HOST.tableName + "(" + tInfo.HOST.columnName.ID + ")," +
+                                "FOREIGN KEY(" + tInfo.HOUSE.columnName.ADDRESS_ID + ") REFERENCES "+ tInfo.ADDRESS.tableName + "(" + tInfo.ADDRESS.columnName.ID + ")," +
+                                "FOREIGN KEY(" + tInfo.HOUSE.columnName.CITY_ID + ") REFERENCES "+ tInfo.CITY.tableName + "(" + tInfo.CITY.columnName.ID + ")," +
+                                "FOREIGN KEY(" + tInfo.HOUSE.columnName.COUNTRY_ID + ") REFERENCES "+ tInfo.COUNTRY.tableName + "(" + tInfo.COUNTRY.columnName.ID + ")," +
+                                "FOREIGN KEY(" + tInfo.HOUSE.columnName.STATE_ID + ") REFERENCES "+ tInfo.STATE.tableName + "(" + tInfo.STATE.columnName.ID +"))"
     }
 };

@@ -5,7 +5,7 @@ const fs         = require('fs');
 const async      = require('async');
 const csvHeaders = require('csv-headers');
 const logger = require('../lib/logger');
-const dbCon = require('../utils/dbConnection');
+const dbCon = require('../utils/dbConnectionPool');
 const qGenerator = require('../workers/queryGenerator');
 const responseConst = require('../utils/constants').response;
 const responseObj = require('../lib/response');
@@ -30,7 +30,8 @@ exports.loadCSV2DB = function(csvFName, tableObj, response){
         .then(context => {
             return new Promise((resolve, reject) => {
                 console.log(context.headers);
-                dbCon.connect((err) => {
+
+                dbCon.getConnection((err) => {
                     if (err) {
                         console.error('error connecting: ' + err.stack);
                         reject(err);
@@ -89,7 +90,12 @@ exports.loadCSV2DB = function(csvFName, tableObj, response){
                             context.headers.forEach(hdrVal => {
                                 let cellVal = datum[hdrVal].trim();
                                 const hostCols = tInfo.HOST.columnName;
-                                if(hdrVal == hostCols.ABOUT || hdrVal == hostCols.LOCATION || hdrVal == hostCols.NAME){
+                                const addressCols = tInfo.ADDRESS.columnName;
+                                const houseCols = tInfo.HOUSE.columnName;
+                                if(hdrVal == hostCols.ABOUT || hdrVal == hostCols.LOCATION || hdrVal == hostCols.NAME ||
+                                    hdrVal == addressCols.NAME || hdrVal == houseCols.NAME || hdrVal == houseCols.SUMMARY ||
+                                    hdrVal == houseCols.SPACE || hdrVal == houseCols.DESCRIPTION || hdrVal == houseCols.RULES
+                                ){
                                     cellVal = cellVal.replace(/'/g,"''");
                                     // console.log(cellVal);
                                 }
@@ -109,7 +115,8 @@ exports.loadCSV2DB = function(csvFName, tableObj, response){
                                             setTimeout(() => { next(); });
                                         }else{
                                             console.log(dataArr);
-                                            next(err);
+                                            // next(err);
+                                            setTimeout(() => { next(); });
                                         }
                                     }else {
                                         logger.log('info', 'Success on executing the query ' + insertQueryStr);
@@ -130,7 +137,7 @@ exports.loadCSV2DB = function(csvFName, tableObj, response){
             });
         })
         .then(context => {
-            dbCon.end();
+            // dbCon.release();
             response(new responseObj(responseConst.SUCCESS, 'Successfully loaded '+ tableObj.tableName +' to database'));
         })
         .catch(err => {
