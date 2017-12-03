@@ -7,8 +7,10 @@ module.exports = {
         "CHECK_IN":"check_in",
         "CHECK_OUT":"check_out",
         "PEOPLE_COUNT":"people",
-        "HOME_TYPE":"home_type",
-        "PRICE_RANGE": "price_range",
+        "ENTIRE_HOME":"entire_home",
+        "PRIVATE_ROOM":"private_room",
+        "START_PRICE": "start_price",
+        "END_PRICE": "end_price",
         "BEDS":"beds",
         "BEDROOMS":"bedrooms",
         "BATHROOMS":"bathrooms",
@@ -20,7 +22,18 @@ module.exports = {
     },
     "HOME_TYPES":{
         "ENTIRE_HOME": "Entire home/apt",
-        "1":"Shared room",
-        "2":"Private room"
+        "SHARED_ROOM":"Shared room",
+        "PRIVATE_ROOM":"Private room",
+        "DEFAULT":{
+            "ENTIRE_HOME":"Entire home/apt",
+            "PRIVATE_ROOM":"Private room"
+        }
     },
+    "SUPER_HOST":{
+        "true":"t",
+        "false":"f"
+    },
+    "HOUSEINFOALIAS":"houseTable",
+    "HOSTINFOALIAS":"hostTable",
+    "CITYINFOALIAS":"cityTable"
 };
