@@ -94,6 +94,7 @@ function getHomes(reqObj, response){
 
     }else {
         //TODO throw error
+        response(new responseObj('error', "Check in date is not provided"));
     }
 }
 

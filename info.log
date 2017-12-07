@@ -116,3 +116,9 @@
 {"level":"info","message":"Success on executing the query2","timestamp":"2017-12-03T02:18:50.496Z"}
 {"level":"info","message":"Executing Query SELECT houseTable.houseId,houseTable.name,houseTable.price,houseTable.summary FROM findHome.houseInfo AS houseTable, findHome.hostInfo AS hostTable, findHome.cityInfo AS cityTable WHERE houseTable.host_id = hostTable.host_id AND houseTable.city = cityTable.cityId AND houseTable.accommodates >= 5 AND (houseTable.room_type= 'Private room')  AND (houseTable.price>=30) AND houseTable.beds >= 2 AND houseTable.bedrooms >= 3 AND houseTable.bathrooms >= 1 AND (hostTable.host_is_superhost= 't') AND (upper(cityTable.cityName) = 'AUSTIN') ","timestamp":"2017-12-03T02:21:49.685Z"}
 {"level":"info","message":"Success on executing the query2","timestamp":"2017-12-03T02:22:36.659Z"}
+{"level":"info","message":"Executing Query SELECT * FROM findHome.houseInfo AS houseTable, findHome.hostInfo AS hostTable WHERE houseTable.houseHostID = hostTable.hostId AND houseTable.houseId = '12171920'","timestamp":"2017-12-04T02:42:56.597Z"}
+{"level":"error","message":"Error on Query ER_BAD_FIELD_ERROR: Unknown column 'houseTable.houseHostID' in 'where clause'","timestamp":"2017-12-04T02:42:57.421Z"}
+{"level":"info","message":"Executing Query SELECT * FROM findHome.houseInfo AS houseTable, findHome.hostInfo AS hostTable WHERE houseTable.host_id = hostTable.host_id AND houseTable.houseId = '12171920'","timestamp":"2017-12-04T02:44:04.276Z"}
+{"level":"info","message":"Success on executing the query1","timestamp":"2017-12-04T02:44:04.565Z"}
+{"level":"info","message":"Executing Query SELECT * FROM findHome.houseInfo AS houseTable, findHome.hostInfo AS hostTable WHERE houseTable.host_id = hostTable.host_id AND houseTable.houseId = '12171934'","timestamp":"2017-12-04T02:44:47.731Z"}
+{"level":"info","message":"Success on executing the query0","timestamp":"2017-12-04T02:44:47.762Z"}

@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 
 const userSignUp = require('./workers/userSignUp');
 const searchHomes = require('./controllers/searchHomes');
+const getHomeInfo = require('./controllers/getHomeInfo');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 app.use('/userSignUp', userSignUp);
 app.use('/FindHome/searchHomes',searchHomes);
+app.use('/FindHome/getHomeInfo',getHomeInfo);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
