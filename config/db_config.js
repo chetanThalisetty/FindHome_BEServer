@@ -13,9 +13,16 @@
  * @type {{host: string, user: string, password: string}}
  */
 module.exports = {
-    "host": 'localhost',
-    "user": 'root',
-    "password": '6672164781',
+    db_US:{
+        "host": '10.200.146.130',
+        "user": 'chetan',
+        "password": 'chetan',
+    },
+    db_UK:{
+        "host": '10.200.1.25',
+        "user": 'chetan',
+        "password": 'chetan',
+    },
     "database": 'findHome',
     "connectionLimit": 100
 };

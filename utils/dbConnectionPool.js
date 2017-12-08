@@ -6,12 +6,28 @@ const db_config = require('../config/db_config');
  * very efficient when concurrent requests comes up.
  * @type {Pool}
  */
-const pool = mysql.createPool({
+const pool_US = mysql.createPool({
     database: db_config.database,
     connectionLimit: db_config.connectionLimit,
-    host: db_config.host,
-    user: db_config.user,
-    password: db_config.password
+    host: db_config.db_US.host,
+    user: db_config.db_US.user,
+    password: db_config.db_US.password
 });
 
-module.exports = pool;
+const pool_UK = mysql.createPool({
+    database: db_config.database,
+    connectionLimit: db_config.connectionLimit,
+    host: db_config.db_UK.host,
+    user: db_config.db_UK.user,
+    password: db_config.db_UK.password
+});
+
+function getConnection(selector){
+    selector = selector.toUpperCase();
+    if (selector == "AUSTIN"){
+        return pool_US;
+    }else{
+        return pool_UK;
+    }
+}
+module.exports = {"pool":getConnection};

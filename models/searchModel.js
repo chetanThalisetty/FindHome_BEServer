@@ -91,7 +91,9 @@ function getHomes(reqObj, response){
         console.log(queryString);
 
         logger.log('info', 'Executing Query ' + queryString);
-        db_pool.query(queryString, function (error, results, fields) {
+        let dbConnection = db_pool.pool(city);
+        console.log(dbConnection);
+        db_pool.pool(city).query(queryString, function (error, results, fields) {
             if(error) {
                 logger.log('error', 'Error on Query ' + error.message);
                 response(new responseObj('error', error));

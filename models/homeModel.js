@@ -22,9 +22,9 @@ function getHomeInfo(reqObj, response){
 
     if(houseID){
         let queryString = "SELECT * " +
-            "FROM dbName.houseTableName AS houseTableAlias, dbName.hostTableName AS hostTableAlias " +
+            "FROM dbName.houseTableName AS houseTableAlias  " +
+            "INNER JOIN dbName.hostTableName AS hostTableAlias ON houseTableAlias.houseHostID = hostTableAlias.hostId " +
             "WHERE " +
-            "houseTableAlias.houseHostID = hostTableAlias.hostId AND " +
             "houseTableAlias.houseID = 'hID'";
 
         queryString = queryString.replace(/dbName/g,db_config.database);
