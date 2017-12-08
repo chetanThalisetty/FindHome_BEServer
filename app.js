@@ -8,17 +8,23 @@ const bodyParser = require('body-parser');
 const userSignUp = require('./workers/userSignUp');
 const searchHomes = require('./controllers/searchHomes');
 const getHomeInfo = require('./controllers/getHomeInfo');
-
+const findHome = require('./controllers/findHome');
 const app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views/frontend'));
+app.set('view engine', 'ejs');
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(express.static(__dirname + '/views/frontend'));
 app.use('/userSignUp', userSignUp);
-app.use('/FindHome/searchHomes',searchHomes);
-app.use('/FindHome/getHomeInfo',getHomeInfo);
+app.use('/searchHomes',searchHomes);
+app.use('/getHomeInfo',getHomeInfo);
+app.use('/',findHome)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
