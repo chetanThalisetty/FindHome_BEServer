@@ -24,7 +24,7 @@ app.use(express.static(__dirname + '/views/frontend'));
 app.use('/userSignUp', userSignUp);
 app.use('/searchHomes',searchHomes);
 app.use('/getHomeInfo',getHomeInfo);
-app.use('/',findHome)
+app.use('/',findHome);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

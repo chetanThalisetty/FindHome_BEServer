@@ -41,23 +41,36 @@ function getHomes(reqObj, response){
         let start_str = format(start_date);
         let end_str = format(end_date);
 
-        const guestCount = people_count ? people_count : "0";
-
+        const guestCountStr = generateGuestCountStr(people_count) + " ";
+        const cityCompareStr = generateCityCompareStr(city.toUpperCase());
         const homeTypeStr = generateHomeTypeStr(entire_home,private_room);
         const priceTypeStr = generatePriceRangeStr(start_price,end_price);
-        const cityCompareStr = generateCityCompareStr(city.toUpperCase());
-        const bedsNum = bed_count ? bed_count: "0";
-        const bedRoomNum = bedroom_count ? bedroom_count: "0";
-        const bathRoomNum = bathroom_count ? bathroom_count: "0";
+        const bedCountStr = generateBedCountStr(bed_count) + " ";
+        const bedRoomCountStr = generateBedroomCountStr(bedroom_count) + " ";
+        const bathRoomCountStr = generateBathroomCountStr(bathroom_count) + " ";
         const superHostStr = generateSuperHostStr(shouldBeSuperHost);
 
+        // let queryString = "SELECT houseId,houseName,housePrice,houseSummary " +
+        //                     "FROM dbName.houseTableName AS houseTableAlias, dbName.hostTableName AS hostTableAlias, dbName.cityTableName AS cityTableAlias " +
+        //                     "WHERE " +
+        //                     "houseTableAlias.houseHostID = hostTableAlias.hostId AND " +
+        //                     "houseTableAlias.houseCityID = cityTableAlias.cityId AND " +
+        //                     "peopleColumnName >= guestCount AND " + homeTypeStr + " AND " + priceTypeStr + "AND " +
+        //                     "bedColumnName >= " + bedsNum + " AND bedRoomColumnName >= " + bedRoomNum + " AND bathRoomColumnName >= " + bathRoomNum +  superHostStr + cityCompareStr;
+
         let queryString = "SELECT houseId,houseName,housePrice,houseSummary " +
-                            "FROM dbName.houseTableName AS houseTableAlias, dbName.hostTableName AS hostTableAlias, dbName.cityTableName AS cityTableAlias " +
-                            "WHERE " +
-                            "houseTableAlias.houseHostID = hostTableAlias.hostId AND " +
-                            "houseTableAlias.houseCityID = cityTableAlias.cityId AND " +
-                            "peopleColumnName >= guestCount AND " + homeTypeStr + " AND " + priceTypeStr + "AND " +
-                            "bedColumnName >= " + bedsNum + " AND bedRoomColumnName >= " + bedRoomNum + " AND bathRoomColumnName >= " + bathRoomNum +  superHostStr + cityCompareStr;
+            "FROM dbName.houseTableName AS houseTableAlias  " +
+            "INNER JOIN dbName.hostTableName AS hostTableAlias ON houseTableAlias.houseHostID = hostTableAlias.hostId " +
+            "INNER JOIN dbName.cityTableName AS cityTableAlias ON houseTableAlias.houseCityID = cityTableAlias.cityId " +
+            "WHERE " + cityCompareStr +
+            guestCountStr +
+            bedCountStr +
+            bedRoomCountStr +
+            bathRoomCountStr +
+            homeTypeStr +
+            priceTypeStr +
+            superHostStr +
+            " LIMIT 100";
 
         queryString = queryString.replace(/dbName/g,db_config.database);
         queryString = queryString.replace('houseTableName',tInfo.HOUSE.tableName);
@@ -74,11 +87,7 @@ function getHomes(reqObj, response){
         queryString = queryString.replace('houseName',houseTAlias + "." + tInfo.HOUSE.columnName.NAME);
         queryString = queryString.replace('housePrice',houseTAlias + "." + tInfo.HOUSE.columnName.PRICE);
         queryString = queryString.replace('houseSummary',houseTAlias + "." + tInfo.HOUSE.columnName.SUMMARY);
-        queryString = queryString.replace('peopleColumnName',houseTAlias + "." + tInfo.HOUSE.columnName.ACCOMMODATES);
-        queryString = queryString.replace('bedColumnName',houseTAlias + "." + tInfo.HOUSE.columnName.BEDS);
-        queryString = queryString.replace('bedRoomColumnName',houseTAlias + "." + tInfo.HOUSE.columnName.BEDROOMS);
-        queryString = queryString.replace('bathRoomColumnName',houseTAlias + "." + tInfo.HOUSE.columnName.BATHROOMS);
-        queryString = queryString.replace('guestCount',guestCount);
+
         console.log(queryString);
 
         logger.log('info', 'Executing Query ' + queryString);
@@ -98,6 +107,59 @@ function getHomes(reqObj, response){
     }
 }
 
+function generateBathroomCountStr(bathroomCount){
+    const bCount = parseInt(bathroomCount);
+    let resultStr = " AND (";
+    const tColumnName = constants.HOUSEINFOALIAS + "."+ tInfo.HOUSE.columnName.BATHROOMS;
+
+    if (!isNaN(bCount) && bCount > 0){
+        resultStr = resultStr + tColumnName + " >= " + bCount + ") ";
+    }else {
+        resultStr = " ";
+    }
+    return resultStr;
+}
+
+function generateBedroomCountStr(bedroomCount){
+    const bCount = parseInt(bedroomCount);
+    let resultStr = " AND (";
+    const tColumnName = constants.HOUSEINFOALIAS + "."+ tInfo.HOUSE.columnName.BEDROOMS;
+
+    if (!isNaN(bCount) && bCount > 0){
+        resultStr = resultStr + tColumnName + " >= " + bCount + ") ";
+    }else {
+        resultStr = " ";
+    }
+    return resultStr;
+}
+
+
+function generateBedCountStr(bedCount){
+    const bCount = parseInt(bedCount);
+    let resultStr = " AND (";
+    const tColumnName = constants.HOUSEINFOALIAS + "."+ tInfo.HOUSE.columnName.BEDS;
+
+    if (!isNaN(bCount) && bCount > 0){
+        resultStr = resultStr + tColumnName + " >= " + bCount + ") ";
+    }else {
+        resultStr = " ";
+    }
+    return resultStr;
+}
+
+function generateGuestCountStr(guestCount){
+    const gCount = parseInt(guestCount);
+    let resultStr = " AND (";
+    const tColumnName = constants.HOUSEINFOALIAS + "."+ tInfo.HOUSE.columnName.ACCOMMODATES;
+
+    if (!isNaN(gCount) && gCount > 0){
+        resultStr = resultStr + tColumnName + " >= " + gCount + ") ";
+    }else {
+        resultStr = " ";
+    }
+    return resultStr;
+}
+
 /**
  * Generates the Home type constraint for select statement. If both null or false is considered as both true
  * @param entireHome - can be true or null
@@ -106,19 +168,20 @@ function getHomes(reqObj, response){
  */
 function generateHomeTypeStr(entireHome, privateRoom){
 
-    let resultStr = "(";
+    let resultStr = " AND (";
     const tColumnName = constants.HOUSEINFOALIAS + "."+ tInfo.HOUSE.columnName.ROOM_TYPE;
 
-    if ((entireHome && privateRoom) || (entireHome == "true" && privateRoom == "true")){
+    if ((entireHome == undefined && privateRoom == undefined)){
+        resultStr = " ";
+    }else if (entireHome == "true" && privateRoom == "true"){
         resultStr = resultStr + tColumnName + "= '" +  constants.HOME_TYPES.ENTIRE_HOME + "' OR ";
-        resultStr = resultStr + tColumnName + "= '" +  constants.HOME_TYPES.PRIVATE_ROOM + "'";
+        resultStr = resultStr + tColumnName + "= '" +  constants.HOME_TYPES.PRIVATE_ROOM + "')";
     }
     else if(entireHome == "true"){
-        resultStr = resultStr + tColumnName + "= '" +  constants.HOME_TYPES.ENTIRE_HOME + "'";
+        resultStr = resultStr + tColumnName + "= '" +  constants.HOME_TYPES.ENTIRE_HOME + "')";
     } else if (privateRoom == "true"){
-        resultStr = resultStr + tColumnName + "= '" +  constants.HOME_TYPES.PRIVATE_ROOM + "'";
+        resultStr = resultStr + tColumnName + "= '" +  constants.HOME_TYPES.PRIVATE_ROOM + "')";
     }
-    resultStr = resultStr + ") ";
 
     return resultStr;
 }
@@ -130,20 +193,23 @@ function generateHomeTypeStr(entireHome, privateRoom){
  * @returns {string}
  */
 function generatePriceRangeStr(start_price, end_price){
-    let resultStr = "(";
+    let resultStr = " AND (";
     const tColumnName = constants.HOUSEINFOALIAS + "."+ tInfo.HOUSE.columnName.PRICE;
     sPrice = parseInt(start_price);
     ePrice = parseInt(end_price);
 
-    if(isNaN(sPrice)){
-        sPrice = 0;
-    }
-    resultStr = resultStr + tColumnName + ">=" + sPrice;
+    if(isNaN(sPrice) && isNaN(ePrice)){
+        resultStr = " ";
+    }else {
+        if(!isNaN(sPrice)) {
+            resultStr = resultStr + tColumnName + ">=" + sPrice;
+        }
 
-    if(!isNaN(ePrice) && ePrice > sPrice){
-        resultStr = resultStr + " AND " + tColumnName + "<=" + ePrice;
+        if(!isNaN(sPrice) && !isNaN(ePrice) && ePrice > sPrice){
+            resultStr = resultStr + " AND " + tColumnName + "<=" + ePrice;
+        }
+        resultStr = resultStr + ") ";
     }
-    resultStr = resultStr + ") ";
     return resultStr;
 }
 
@@ -166,7 +232,7 @@ function generateSuperHostStr(shouldBeSuperHost){
 }
 
 function generateCityCompareStr(city){
-    let resultStr = "AND (upper(";
+    let resultStr = " (upper(";
     const tColumnName = constants.CITYINFOALIAS + "."+ tInfo.CITY.columnName.NAME + ") ";
     if (city){
         resultStr = resultStr + tColumnName + "= '"+ city +"') ";

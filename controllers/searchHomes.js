@@ -44,7 +44,7 @@ router.post('/',function(req, res, next){
     //     "Access-Control-Allow-Origin": '*'
     // });
     searchModel.getHomes(req,(result) => {
-        console.log(JSON.parse(JSON.stringify(result)));
+        // console.log(JSON.parse(JSON.stringify(result)));
         let message = result.message;
         res.render('house_response',{data : message});
     });

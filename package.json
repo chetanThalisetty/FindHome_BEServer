@@ -13,13 +13,13 @@
     "csv-headers": "^1.0.0",
     "csv-parse": "^2.0.0",
     "debug": "~2.6.9",
+    "ejs": "^2.5.7",
     "express": "~4.15.5",
     "morgan": "~1.9.0",
     "mysql": "^2.15.0",
     "pug": "2.0.0-beta11",
     "rotating-file-stream": "^1.3.2",
     "serve-favicon": "~2.4.5",
-    "winston": "^2.4.0",
-    "ejs": "~2.5.7"
+    "winston": "^2.4.0"
   }
 }
