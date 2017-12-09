@@ -24,10 +24,10 @@ const pool_UK = mysql.createPool({
 
 function getConnection(selector){
     selector = selector.toUpperCase();
-    if (selector == "AUSTIN"){
-        return pool_US;
-    }else{
+    if (selector == "CHICAGO"){
         return pool_UK;
+    }else{
+        return pool_US;
     }
 }
 module.exports = {"pool":getConnection};

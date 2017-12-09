@@ -24,5 +24,6 @@ module.exports = {
         "password": 'chetan',
     },
     "database": 'findHome',
-    "connectionLimit": 100
+    "connectionLimit": 100,
+    "defaultDB" : "AUSTIN"
 };

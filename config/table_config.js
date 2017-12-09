@@ -7,16 +7,13 @@ const tInfo = require('../config/table_info');
  * @type {{USER: Object}} - userInfo table
  */
 module.exports = {
-    "USER": {
-        "tableName" : "userinfo",
-        "columnName" : {
-            "ID": "userID",
-            "fName":"firstName",
-            "lName":"lastName",
-            "email":"email",
-            "password": "password",
-            "dob": "dateOfBirth"
-        }
+
+    "USER":{
+        "tableName" : tInfo.USER.tableName,
+        "tableCreationQuery": "CREATE TABLE " + tInfo.USER.tableName +
+                                "(" + tInfo.USER.columnName.email + " VARCHAR(255) UNIQUE NOT NULL, " +
+                                tInfo.USER.columnName.password + " VARCHAR(255) NOT NULL, " +
+                                "PRIMARY KEY(" + tInfo.USER.columnName.email+ "))"
     },
     "COUNTRY":{
         "tableName" : tInfo.COUNTRY.tableName,

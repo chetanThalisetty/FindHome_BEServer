@@ -4,13 +4,28 @@ const path = require('path');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
-const userSignUp = require('./workers/userSignUp');
+const session  = require('express-session');
+
+const userSignUp = require('./controllers/userSignUp');
 const searchHomes = require('./controllers/searchHomes');
 const getHomeInfo = require('./controllers/getHomeInfo');
 const findHome = require('./controllers/findHome');
-const login = require('./controllers/login')
+const login = require('./controllers/login');
 const app = express();
+let urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+app.use(cookieParser());
+app.use(urlencodedParser);
+app.use(bodyParser.json());
+app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+//setting up the passport
+let setupPassportStrategy = require('./config/passport_config.js');
+setupPassportStrategy(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views/frontend'));
@@ -26,6 +41,7 @@ app.use('/userSignUp', userSignUp);
 app.use('/searchHomes',searchHomes);
 app.use('/getHomeInfo',getHomeInfo);
 app.use('/findHome',findHome);
+app.use('/',findHome);
 app.use('/login',login);
 
 // catch 404 and forward to error handler

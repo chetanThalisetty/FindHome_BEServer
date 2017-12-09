@@ -1,7 +1,8 @@
-const db_con = require('../utils/dbConnection');
+const db_conPool = require('../utils/dbConnectionPool');
 const table_config = require('../config/table_config');
 const logger = require('../lib/logger');
 const log_config = require('../config/log_config');
+const db_config = require('../config/db_config');
 
 /**
  * createAllTables
@@ -12,7 +13,7 @@ const log_config = require('../config/log_config');
 const user = table_config.USER;
 const userCols = user.columnName;
 const tableQueries = [
-    "CREATE TABLE " + user.tableName + "(" + userCols.ID + " INT(9) NOT NULL auto_increment, " + userCols.fName + " VARCHAR(255) NOT NULL, " + userCols.lName + " VARCHAR(255) NOT NULL, " + userCols.email + " VARCHAR(255) UNIQUE NOT NULL, " + userCols.password + " VARCHAR(255) NOT NULL, " + userCols.dob + " VARCHAR(255) NOT NULL, PRIMARY KEY(" + userCols.ID+ "))"
+    table_config.USER.tableCreationQuery
 ];
 
 const createTables = () => {
@@ -20,7 +21,7 @@ const createTables = () => {
     for (let i = 0; i< queryCount; i++) {
         const sqlQuery = tableQueries[i];
         logger.log(log_config.infoLevel, "Executing Query " + sqlQuery);
-        db_con.query(tableQueries[i], (err, result) => {
+        db_conPool.pool(db_config.defaultDB).query(tableQueries[i], (err, result) => {
             if(err) {
                 logger.log(log_config.errorLevel, err);
             } else{
