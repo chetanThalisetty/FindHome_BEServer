@@ -81,31 +81,11 @@
                 <div class="container">
                     <div class="nav-header">
                         <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-                        <h1 id="fh5co-logo"><a href="index.ejs">FIND HOME</a></h1>
+                        <h1 id="fh5co-logo"><a href="/">FIND HOME</a></h1>
                         <nav id="fh5co-menu-wrap" role="navigation">
                             <ul class="sf-menu" id="fh5co-primary-menu">
-                                <li><a href="index.ejs">Home</a></li>
-                                <li>
-                                    <a class="active" href="hotel.html" class="fh5co-sub-ddown">Hotel</a>
-                                    <ul class="fh5co-sub-menu">
-                                        <li><a href="#">Luxe Hotel</a></li>
-                                        <li><a href="#">Deluxe Hotel</a></li>
-                                        <li>
-                                            <a href="#" class="fh5co-sub-ddown">King Hotel</a>
-                                            <ul class="fh5co-sub-menu">
-                                                <li><a href="http://freehtml5.co/preview/?item=build-free-html5-bootstrap-template" target="_blank">Build</a></li>
-                                                <li><a href="http://freehtml5.co/preview/?item=work-free-html5-template-bootstrap" target="_blank">Work</a></li>
-                                                <li><a href="http://freehtml5.co/preview/?item=light-free-html5-template-bootstrap" target="_blank">Light</a></li>
-                                                <li><a href="http://freehtml5.co/preview/?item=relic-free-html5-template-using-bootstrap" target="_blank">Relic</a></li>
-                                                <li><a href="http://freehtml5.co/preview/?item=display-free-html5-template-using-bootstrap" target="_blank">Display</a></li>
-                                                <li><a href="http://freehtml5.co/preview/?item=sprint-free-html5-template-bootstrap" target="_blank">Sprint</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Five Star Hotel</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="services.html">Services</a></li>
-                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="/">Home</a></li>
+
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
                         </nav>
@@ -115,14 +95,15 @@
 
         </div>
         <!-- end:fh5co-header -->
-        <div class="fh5co-parallax" style="background-image: url(images/hotel_image.jpg);" data-stellar-background-ratio="0.5">
+        <% let random_image= 'house_image_'+ (Math.floor(Math.random() *10) + 1) %>
+        <div class="fh5co-parallax" style="background-image: url(images/<%= random_image %>.jpg);" data-stellar-background-ratio="0.5">
             <div class="overlay"></div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center fh5co-table">
                         <div class="fh5co-intro fh5co-table-cell">
-                            <h1 class="text-center">Choose Our Hotel</h1>
-                            <p>Made with love by the fine folks at <a href="http://freehtml5.co">FreeHTML5.co</a></p>
+                            <h1 class="text-center">Choose Your Home</h1>
+                            <p>Best place you can ever find</p>
                         </div>
                     </div>
                 </div>
@@ -137,13 +118,14 @@
                     <% for(var i=0; i < 10; i++) { %>
                     <div class="col-md-4">
                         <div class="hotel-content">
-                            <div class="hotel-grid" style="background-image: url(images/hotel_image.jpg);">
+                            <% let random_image= 'house_image_'+ (Math.floor(Math.random() *10) + 1) %>
+                            <div class="hotel-grid" style="background-image: url(images/<%= random_image %>.jpg);">
                                 <div class="price"><small>For as low as</small><span><%= data[i].price %>/night</span></div>
                                 <a class="book-now text-center" href="#"><i class="ti-calendar"></i> Book Now</a>
                             </div>
                             <div class="desc">
                                 <h3><a href="http://localhost:3000/get_house?id=<%= data[i].houseId %>"><%= data[i].name %></a></h3>
-                                <p><%= data[i].summary %></p>
+                                <textarea rows="5" cols="40" style="border: none"><%= data[i].summary %></textarea>
                             </div>
                         </div>
                     </div>
@@ -241,6 +223,13 @@
 <script src="js/jquery.flexslider-min.js"></script>
 
 <script src="js/custom.js"></script>
+<script language="JavaScript">
+        function randomImg(){
+        var randomNumber = Math.floor(Math.random() *5) + 1;
+        var imgName = "img_" + randomNumber + ".jpg";
+        document.getElementById("greenbox").src= "YOUR_IMG_PATH" + "/" + imgName ;
+    }
+</script>
 
 </body>
 </html>
