@@ -12,7 +12,7 @@ const db_config = require('../config/db_config');
  */
 
 exports.fetchByCols =function (fields,cond,cb){
-    const condition = table_info.USER.columnName.email + " = '" + cond + "'";
+    // const condition = table_info.USER.columnName.email + " = '" + cond + "'";
     let selectClause = "SELECT ";
     let i=0;
     for(i  = 0 ; i < fields.length-1; i++){
@@ -23,7 +23,7 @@ exports.fetchByCols =function (fields,cond,cb){
     }
     const finalQuery = selectClause + " FROM "+
                         db_config.database+ "." + table_info.USER.tableName +
-                        " WHERE "+condition+";";
+                        " WHERE "+cond+";";
     logger.log('info','about to execute the Query '+finalQuery);
     console.log('about to execute the Query '+finalQuery);
     db_pool.pool(db_config.defaultDB).query(finalQuery,function(err,rows,fileds){

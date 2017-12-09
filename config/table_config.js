@@ -11,9 +11,10 @@ module.exports = {
     "USER":{
         "tableName" : tInfo.USER.tableName,
         "tableCreationQuery": "CREATE TABLE " + tInfo.USER.tableName +
-                                "(" + tInfo.USER.columnName.email + " VARCHAR(255) UNIQUE NOT NULL, " +
+                                "(" + tInfo.USER.columnName.ID + " INT NOT NULL AUTO_INCREMENT," +
+                                tInfo.USER.columnName.email + " VARCHAR(255) UNIQUE NOT NULL, " +
                                 tInfo.USER.columnName.password + " VARCHAR(255) NOT NULL, " +
-                                "PRIMARY KEY(" + tInfo.USER.columnName.email+ "))"
+                                "PRIMARY KEY(" + tInfo.USER.columnName.ID+ "))"
     },
     "COUNTRY":{
         "tableName" : tInfo.COUNTRY.tableName,

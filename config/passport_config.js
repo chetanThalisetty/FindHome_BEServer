@@ -9,13 +9,13 @@ function setUpStrategy(passport){
     passport.serializeUser(function(user, done) {
         console.log('in SerializeUser..');
         console.log(user);
-        done(null, user[tInfo.USER.columnName.email]);
+        done(null, user[tInfo.USER.columnName.ID]);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
         console.log('in DeSerializeUser..');
-        user.fetchByCols(["*"], id, function(err, user) {
+        user.fetchByCols(["*"], tInfo.USER.columnName.ID + "= '" + id + "'", function(err, user) {
             if(!err){
                 console.log(user[0]);
                 done(err,user[0]);
@@ -33,7 +33,7 @@ function setUpStrategy(passport){
         process.nextTick(function(){
             logger.log('info','About to check the authentication with '+email+" with password as "+password);
             console.log('About to check the authentication with '+email+"and password as "+password);
-            user.fetchByCols(["*"], email,function(err,rows){
+            user.fetchByCols(["*"], tInfo.USER.columnName.email + "='" + email + "'",function(err,rows){
                 if(rows.length == 0){
                     logger.log('info','email does not exist in database');
                     console.log('email does not exist in database');
