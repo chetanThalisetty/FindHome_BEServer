@@ -40,7 +40,7 @@ function getHomeInfo(reqObj, response){
         console.log(queryString);
 
         logger.log('info', 'Executing Query ' + queryString);
-        db_pool.query(queryString, function (error, results, fields) {
+        db_pool.pool(db_config.defaultDB).query(queryString, function (error, results, fields) {
             if(error) {
                 logger.log('error', 'Error on Query ' + error.message);
                 response(new responseObj('error', error));
