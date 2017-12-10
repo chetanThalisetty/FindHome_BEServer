@@ -5,6 +5,16 @@
  * @type {{USER: Object}} - userInfo table
  */
 module.exports = {
+    "BOOKING": {
+        "tableName" : "bookedinfo",
+        "columnName" : {
+            "ID": "bookingID",
+            "HOUSE_ID":"houseID",
+            "USER_ID": "userID",
+            "START_DATE": "startDate",
+            "END_DATE": "endDate"
+        }
+    },
     "USER": {
         "tableName" : "userinfo",
         "columnName" : {

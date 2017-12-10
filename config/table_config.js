@@ -8,6 +8,18 @@ const tInfo = require('../config/table_info');
  */
 module.exports = {
 
+    "BOOKING":{
+        "tableName" : tInfo.BOOKING.tableName,
+        "tableCreationQuery": "CREATE TABLE " + tInfo.BOOKING.tableName +
+                                " ("+ tInfo.BOOKING.columnName.ID + " INT NOT NULL AUTO_INCREMENT," +
+                                tInfo.BOOKING.columnName.HOUSE_ID + " VARCHAR(255) NOT NULL," +
+                                tInfo.BOOKING.columnName.USER_ID + " INT NOT NULL," +
+                                tInfo.BOOKING.columnName.START_DATE + " VARCHAR(255) NOT NULL," +
+                                tInfo.BOOKING.columnName.END_DATE + " VARCHAR(255) NOT NULL," +
+                                "PRIMARY KEY(" + tInfo.BOOKING.columnName.ID + "),"+
+                                "FOREIGN KEY(" + tInfo.BOOKING.columnName.USER_ID + ") REFERENCES "+ tInfo.USER.tableName + "(" + tInfo.USER.columnName.ID + ")," +
+                                "FOREIGN KEY(" + tInfo.BOOKING.columnName.HOUSE_ID + ") REFERENCES "+ tInfo.HOUSE.tableName + "(" + tInfo.HOUSE.columnName.ID + "))"
+    },
     "USER":{
         "tableName" : tInfo.USER.tableName,
         "tableCreationQuery": "CREATE TABLE " + tInfo.USER.tableName +
