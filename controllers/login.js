@@ -14,7 +14,7 @@ router.use(function timeLog (req, res, next) {
 
 router.post('/', passport.authenticate('local', {
     successRedirect : '/FindHome', // redirect to the secure profile section
-    failureRedirect : '', // redirect back to the signup page if there is an error
+    failureRedirect : '/login_page', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
 }));
 

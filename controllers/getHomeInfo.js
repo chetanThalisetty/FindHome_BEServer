@@ -22,7 +22,8 @@ router.get('/',function(req, res, next){
     // });
     homeModel.getCompleteHouseInfo(req,(result) => {
         console.log(result);
-        res.send(JSON.stringify(result));
+        res.render('single_house',{data: result.message[0]})
+        //res.send(JSON.stringify(result));
     });
 });
 
