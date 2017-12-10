@@ -21,6 +21,7 @@ router.get('/',function(req, res, next){
     //     "Access-Control-Allow-Origin": '*'
     // });
     homeModel.getCompleteHouseInfo(req,(result) => {
+        console.log(result);
         res.send(JSON.stringify(result));
     });
 });
