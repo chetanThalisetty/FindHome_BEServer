@@ -13,6 +13,8 @@ const searchHomes = require('./controllers/searchHomes');
 const getHomeInfo = require('./controllers/getHomeInfo');
 const findHome = require('./controllers/findHome');
 const login = require('./controllers/login');
+const bookHome = require('./controllers/bookHome');
+
 const app = express();
 let urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -43,6 +45,7 @@ app.use('/getHomeInfo',getHomeInfo);
 app.use('/findHome',findHome);
 app.use('/',findHome);
 app.use('/login',login);
+app.use('/bookHome',bookHome);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
