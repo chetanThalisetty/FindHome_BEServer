@@ -13,7 +13,7 @@ router.use(function timeLog (req, res, next) {
     next();
 });
 
-router.post('/',function(req, res, next){
+router.get('/',function(req, res, next){
     console.log('user trying to get home Info: %j', req.body);
 
     // res.set({

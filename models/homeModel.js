@@ -18,7 +18,7 @@ function getHomeInfo(reqObj, response){
     const houseTAlias = constants.HOUSEINFOALIAS;
     const hostTAlias = constants.HOSTINFOALIAS;
 
-    const houseID = reqObj.body.house_id;
+    const houseID = reqObj.query.house_id;
 
     if(houseID){
         let queryString = "SELECT * " +
