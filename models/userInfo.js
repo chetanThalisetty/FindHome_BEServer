@@ -3,7 +3,7 @@ const logger = require('../lib/logger');
 const table_info = require('../config/table_info');
 const responseObj = require('../lib/response');
 const db_config = require('../config/db_config');
-
+const constants = require('../utils/constants');
 /**
  * userInfo
  *
@@ -67,7 +67,7 @@ exports.add = function (userInfo, response) {
             response(new responseObj('error', error));
         }else {
             logger.log('info', 'Success on executing the query');
-            response(new responseObj('success', results[0]));
+            response(new responseObj('success',constants.response.SUCCESS ));
         }
     });
 };

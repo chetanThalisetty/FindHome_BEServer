@@ -25,5 +25,9 @@ module.exports = {
     },
     "database": 'findHome',
     "connectionLimit": 100,
+<<<<<<< HEAD
     "defaultDB" : "CHICAGOSS"
+=======
+    "defaultDB" : "CHICAGO"
+>>>>>>> made some changes in controllers ,dbconfig file, userInfo
 };

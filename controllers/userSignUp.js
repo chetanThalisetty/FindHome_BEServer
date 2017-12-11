@@ -2,6 +2,7 @@ const express = require('express');
 const hashHelper = require('../lib/hash');
 const user = require('../models/userInfo');
 const table_info = require('../config/table_info');
+const constants = require('../utils/constants');
 const router = express.Router();
 
 /**
@@ -33,7 +34,16 @@ router.post('/', function(req, res, next){
     values[colNames.email] = req.body.email;
     values[colNames.password] = hashHelper.hashPassword(req.body.password);
     user.add(values,(result) => {
-        res.send(JSON.stringify(result));
+        //res.send(JSON.stringify(result));
+        console.log(result.message);
+        if(result.message === constants.response.SUCCESS ){
+            res.render('index',{title: 'Find Home'});
+        }
+        else{
+            let error_code = result.message.errno;
+            res.render('login',{error : error_code});
+
+        }
     });
 });
 

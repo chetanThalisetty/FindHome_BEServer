@@ -6,6 +6,7 @@ const passport = require('passport');
 
 //middleware that is specific to this router
 router.use(function timeLog (req, res, next) {
+    console.log(req);
     console.log("In login Request");
     console.log('Time: ', Date.now());
     next();
