@@ -34,6 +34,10 @@ function setUpStrategy(passport){
             logger.log('info','About to check the authentication with '+email+" with password as "+password);
             console.log('About to check the authentication with '+email+"and password as "+password);
             user.fetchByCols(["*"], tInfo.USER.columnName.email + "='" + email + "'",function(err,rows){
+                if(err || !rows){
+                    cb(null, false);
+                    return
+                }
                 if(rows.length == 0){
                     logger.log('info','email does not exist in database');
                     console.log('email does not exist in database');

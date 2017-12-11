@@ -60,6 +60,8 @@ function bookHome(reqObj, response){
                                     });
                                 }
                                 logger.log('info', 'Success on executing the query' + results.length);
+                                results[constants.SESSION.CHECK_IN] = check_in_date;
+                                results[constants.SESSION.CHECK_OUT] = check_out_date;
                                 response(new responseObj('success', results));
                             });
                         }

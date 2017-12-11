@@ -1,6 +1,8 @@
 
 const mysql = require('mysql');
 const db_config = require('../config/db_config');
+const logger = require('../lib/logger');
+
 /**
  * creates a pool of connections which can be re-used.
  * very efficient when concurrent requests comes up.
@@ -25,8 +27,10 @@ const pool_UK = mysql.createPool({
 function getConnection(selector){
     selector = selector.toUpperCase();
     if (selector == db_config.defaultDB){
+        logger.log('info','executing on Nikhil');
         return pool_UK;
     }else{
+        logger.log('info','executing on Chetan');
         return pool_US;
     }
 }
