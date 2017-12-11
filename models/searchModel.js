@@ -44,12 +44,6 @@ function getHomes(reqObj, response){
         console.log(start_str);
         console.log(end_str);
 
-        // storing the start and end dates in the session
-        reqObj.session.views[constants.SESSION.CHECK_IN] = start_str;
-        reqObj.session.views[constants.SESSION.CHECK_OUT] = end_str;
-
-        console.log(reqObj.session);
-
         const guestCountStr = generateGuestCountStr(people_count) + " ";
         const cityCompareStr = generateCityCompareStr(city.toUpperCase());
         const homeTypeStr = generateHomeTypeStr(entire_home,private_room);
@@ -110,6 +104,14 @@ function getHomes(reqObj, response){
                 response(new responseObj('success', results));
             }
         });
+
+        // storing the start and end dates in the session
+        if(reqObj.session.views){
+            reqObj.session.views[constants.SESSION.CHECK_IN] = start_str;
+            reqObj.session.views[constants.SESSION.CHECK_OUT] = end_str;
+            reqObj.session.views[constants.SESSION.CITY] = city.toUpperCase();
+            logger.log('info',reqObj.session.views[constants.SESSION.CHECK_IN] + " : " + reqObj.session.views[constants.SESSION.CHECK_OUT]);
+        }
 
     }else {
         //TODO throw error

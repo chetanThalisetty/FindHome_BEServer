@@ -8,7 +8,7 @@ const tInfo = require('../config/table_info');
 function setUpStrategy(passport){
     passport.serializeUser(function(user, done) {
         console.log('in SerializeUser..');
-        console.log(user);
+        // console.log(user);
         done(null, user[tInfo.USER.columnName.ID]);
     });
 
@@ -17,7 +17,7 @@ function setUpStrategy(passport){
         console.log('in DeSerializeUser..');
         user.fetchByCols(["*"], tInfo.USER.columnName.ID + "= '" + id + "'", function(err, user) {
             if(!err){
-                console.log(user[0]);
+                // console.log(user[0]);
                 done(err,user[0]);
             }else{
                 console("Failed..");
@@ -39,8 +39,8 @@ function setUpStrategy(passport){
                     console.log('email does not exist in database');
                     cb(null,false);
                 }else{
-                    console.log(rows);
-                    console.log(rows[0][tInfo.USER.columnName.password]);
+                    // console.log(rows);
+                    // console.log(rows[0][tInfo.USER.columnName.password]);
                     if( hashGen.comparePassword(rows[0][tInfo.USER.columnName.password], password) ){
                         logger.log('info','Authentication successful');
                         cb(null,rows[0]);

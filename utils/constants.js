@@ -2,6 +2,8 @@ module.exports = {
     "SESSION":{
         "CHECK_IN":"check_in",
         "CHECK_OUT":"check_out",
+        "HOUSE_ID":"house_id",
+        "CITY":"city"
     },
     "response": {
         "SUCCESS": 'success',

@@ -24,7 +24,7 @@ const pool_UK = mysql.createPool({
 
 function getConnection(selector){
     selector = selector.toUpperCase();
-    if (selector == "CHICAGO"){
+    if (selector == db_config.defaultDB){
         return pool_UK;
     }else{
         return pool_US;

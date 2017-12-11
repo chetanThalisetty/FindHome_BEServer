@@ -23,6 +23,11 @@ function getHomeInfo(reqObj, response){
     const houseID = reqObj.query.house_id;
 
     if(houseID){
+        // checking for session obj
+        let cityComparator = db_config.defaultDB;
+        if(reqObj.session.views){
+            cityComparator = reqObj.session.views[constants.SESSION.CITY];
+        }
         let queryString = "SELECT * " +
             "FROM dbName.houseTableName AS houseTableAlias  " +
             "INNER JOIN dbName.hostTableName AS hostTableAlias ON houseTableAlias.houseHostID = hostTableAlias.hostId " +
@@ -42,7 +47,7 @@ function getHomeInfo(reqObj, response){
         console.log(queryString);
 
         logger.log('info', 'Executing Query ' + queryString);
-        db_pool.pool(db_config.defaultDB).query(queryString, function (error, results, fields) {
+        db_pool.pool(cityComparator).query(queryString, function (error, results, fields) {
             if(error) {
                 logger.log('error', 'Error on Query ' + error.message);
                 response(new responseObj('error', error));
@@ -51,6 +56,12 @@ function getHomeInfo(reqObj, response){
                 response(new responseObj('success', results));
             }
         });
+
+        // storing the start and end dates in the session
+        if(reqObj.session.views){
+            reqObj.session.views[constants.SESSION.HOUSE_ID] = houseID;
+            logger.log('info',reqObj.session.views[constants.SESSION.HOUSE_ID]);
+        }
     }else{
         //TODO throw error
     }

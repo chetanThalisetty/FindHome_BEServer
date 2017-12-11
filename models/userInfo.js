@@ -24,8 +24,8 @@ exports.fetchByCols =function (fields,cond,cb){
     const finalQuery = selectClause + " FROM "+
                         db_config.database+ "." + table_info.USER.tableName +
                         " WHERE "+cond+";";
-    logger.log('info','about to execute the Query '+finalQuery);
-    console.log('about to execute the Query '+finalQuery);
+    // logger.log('info','about to execute the Query '+finalQuery);
+    // console.log('about to execute the Query '+finalQuery);
     db_pool.pool(db_config.defaultDB).query(finalQuery,function(err,rows,fileds){
         if(err){
             logger.log('info','Query Execution Failed '+err);
@@ -66,8 +66,15 @@ exports.add = function (userInfo, response) {
             logger.log('error', 'Error on Query ' + error.message);
             response(new responseObj('error', error));
         }else {
-            logger.log('info', 'Success on executing the query');
-            response(new responseObj('success',constants.response.SUCCESS ));
+            db_pool.pool("other").query(queryStr, function (error, results, fields) {
+                if(error) {
+                    logger.log('error', 'Error on Query ' + error.message);
+                    response(new responseObj('error', error));
+                }else {
+                    logger.log('info', 'Success on executing the query');
+                    response(new responseObj('success',constants.response.SUCCESS ));
+                }
+            });
         }
     });
 };

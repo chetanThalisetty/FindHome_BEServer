@@ -3,15 +3,31 @@ const db_config = require('../config/db_config');
 const tInfo = require('../config/table_info');
 const logger = require('../lib/logger');
 const responseObj = require('../lib/response');
+const constants = require('../utils/constants');
 
 
 function bookHome(reqObj, response){
-    const check_in_date =reqObj.body.check_in;
-    const check_out_date = reqObj.body.check_out;
-    const userID = reqObj.body.userID;
-    const houseID = reqObj.body.houseID;
+    let check_in_date;
+    let check_out_date;
+    let userID;
+    let houseID;
 
-    if (check_in_date == undefined || check_out_date == undefined || userID == undefined || houseID == undefined){
+    // checking for session obj
+    let cityComparator = db_config.defaultDB;
+
+    if(reqObj.session.views && reqObj.session.passport){
+        check_in_date = reqObj.session.views[constants.SESSION.CHECK_IN];
+        check_out_date = reqObj.session.views[constants.SESSION.CHECK_OUT];
+        userID = reqObj.session.passport['user'];
+        houseID = reqObj.session.views[constants.SESSION.HOUSE_ID];
+        cityComparator = reqObj.session.views[constants.SESSION.CITY];
+    }
+    // const check_in_date =reqObj.body.check_in;
+    // const check_out_date = reqObj.body.check_out;
+    // const userID = reqObj.body.userID;
+    // const houseID = reqObj.body.houseID;
+
+    if (check_in_date == undefined || check_out_date == undefined || userID == undefined || houseID == undefined || cityComparator == undefined){
         response(new responseObj('error', "Check the parameters passed"));
     }else {
         const queryStr = "INSERT INTO " +
@@ -22,7 +38,7 @@ function bookHome(reqObj, response){
                             "'" + userID + "', " +
                             "'" + check_in_date + "', " +
                             "'" + check_out_date + "'); ";
-        const connectionObj = dbConnectionPool.pool(db_config.defaultDB);
+        const connectionObj = dbConnectionPool.pool(cityComparator);
         connectionObj.getConnection(function(error,connection){
             connection.beginTransaction(function(err){
                     if (err){
