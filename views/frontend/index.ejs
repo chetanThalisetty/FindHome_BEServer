@@ -72,7 +72,10 @@
 					<nav id="fh5co-menu-wrap" role="navigation">
 						<ul class="sf-menu" id="fh5co-primary-menu">
 							<li><a class="active" href="/">Home</a></li>
-							<li><a href="contact.html">ABOUT</a></li>
+							<li><a href="contact.html">About</a></li>
+							<li><a href="">Logged in as nikhil</a></li>
+							<!--<p><a href="http://<%= host_address %>:<%= port %>/login_page" class="btn btn-primary btn-lg">Log Out</a></p>-->
+
 						</ul>
 					</nav>
 				</div>
@@ -83,7 +86,7 @@
 	<aside id="fh5co-hero" class="js-fullheight">
 		<div class="flexslider js-fullheight">
 			<ul class="slides">
-		   	<li style="background-image: url(images/slider1.jpg);">
+		   	<li style="background-image: url(images/hotel_image.jpg);">
 		   		<div class="overlay-gradient"></div>
 		   		<div class="container">
 		   			<div class="col-md-12 col-md-offset-0 text-center slider-text">
@@ -97,7 +100,7 @@
 		   			</div>
 		   		</div>
 		   	</li>
-		   	<li style="background-image: url(images/slider2.jpg);">
+		   	<li style="background-image: url(images/house_image_9.jpg);">
 		   		<div class="overlay-gradient"></div>
 		   		<div class="container">
 					<!--<div class="alert alert-success alert-dismissable">-->
@@ -117,7 +120,7 @@
 		   			</div>
 		   		</div>
 		   	</li>
-		   	<li style="background-image: url(images/slider3.jpg);">
+		   	<li style="background-image: url(images/house_image_1.jpg);">
 		   		<div class="overlay-gradient"></div>
 		   		<div class="container">
 		   			<div class="col-md-12 col-md-offset-0 text-center slider-text">
@@ -147,8 +150,8 @@
 						<form action="http://<%= host_address %>:<%= port %>/searchHomes" method = "POST">
 							<!-- "http://127.0.0.1:3000/process_get" method = "GET" -->
 							<div class="a-col">
-								<section>
-									<select class="cs-select cs-skin-border" name = "city" required>
+								<section name="section" required>
+									<select class="cs-select cs-skin-border" name = "city">
 										<option value="" disabled selected>Select Location</option>
 										<option value="Austin">Austin,Texas,USA</option>
 										<option value="Chicago">Chicago,Illinois,USA</option>
