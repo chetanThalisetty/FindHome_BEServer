@@ -13,6 +13,7 @@ const server_config =require('../config/server_config');
 router.use(function timeLog (req, res, next) {
     console.log('Time: ', Date.now());
     console.log('---------------------------Trying to search for homes---------------------------------');
+
     next();
 });
 /**
@@ -38,13 +39,12 @@ router.use(function timeLog (req, res, next) {
  */
 router.post('/',function(req, res, next){
     console.log('user trying to search for homes: %j', req.body);
-
     // res.set({
     //     'Content-Type': 'application/json',
     //     "Access-Control-Allow-Origin": '*'
     // });
     searchModel.getHomes(req,(result) => {
-        console.log(JSON.parse(JSON.stringify(result)));
+        // console.log(JSON.parse(JSON.stringify(result)));
         let message = result.message;
         res.render('house_response',{data : message,host_address :server_config.hosting_server_ip,port:server_config.port_no});
     });

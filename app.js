@@ -50,8 +50,12 @@ app.use('/login',login);
 app.use('/bookHome',bookHome);
 
 app.get('/login_page',function (req,res) {
-         res.render('login',{host_address :server_config.hosting_server_ip,port:server_config.port_no, error : undefined})
-})
+
+    if (!req.session.views) {
+        req.session.views = {};
+    }
+    res.render('login',{host_address :server_config.hosting_server_ip,port:server_config.port_no, error : undefined});
+});
 
 
 // catch 404 and forward to error handler

@@ -15,6 +15,8 @@ const responseObj = require('../lib/response');
  * @param response - gives the table row of the specified houseid
  */
 function getHomeInfo(reqObj, response){
+    console.log("In home model");
+    console.log(reqObj.session);
     const houseTAlias = constants.HOUSEINFOALIAS;
     const hostTAlias = constants.HOSTINFOALIAS;
 

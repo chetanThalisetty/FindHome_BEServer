@@ -27,19 +27,28 @@ function getHomes(reqObj, response){
 
     // Formatting the date string
     if (check_in_date) {
-        let start_date = check_in_date.split("-");
-        start_date = new Date(start_date[0],start_date[1]-1,start_date[2]);
+        let start_date = check_in_date.split("/");
+        let start_date_Conv = new Date(start_date[2],start_date[0]-1,start_date[1]);
 
         let end_date;
         if (check_out_date) {
-            end_date = check_out_date.split("-");
-            end_date = new Date(end_date[0],end_date[1]-1,end_date[2]);
+            end_date = check_out_date.split("/");
+            end_date = new Date(end_date[2],end_date[0]-1,end_date[1]);
         }else {
-            end_date = new Date(start_date[0],start_date[1]-1, start_date[2]);
+            end_date = new Date(start_date[2],start_date[0]-1,start_date[1]);
             end_date.setDate(end_date.getDate()+3);
         }
-        let start_str = format(start_date);
+        let start_str = format(start_date_Conv);
         let end_str = format(end_date);
+
+        console.log(start_str);
+        console.log(end_str);
+
+        // storing the start and end dates in the session
+        reqObj.session.views[constants.SESSION.CHECK_IN] = start_str;
+        reqObj.session.views[constants.SESSION.CHECK_OUT] = end_str;
+
+        console.log(reqObj.session);
 
         const guestCountStr = generateGuestCountStr(people_count) + " ";
         const cityCompareStr = generateCityCompareStr(city.toUpperCase());
@@ -92,7 +101,6 @@ function getHomes(reqObj, response){
 
         logger.log('info', 'Executing Query ' + queryString);
         let dbConnection = db_pool.pool(city);
-        console.log(dbConnection);
         db_pool.pool(city).query(queryString, function (error, results, fields) {
             if(error) {
                 logger.log('error', 'Error on Query ' + error.message);
