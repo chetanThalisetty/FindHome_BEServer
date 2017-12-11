@@ -45,7 +45,13 @@ app.use('/getHomeInfo',getHomeInfo);
 app.use('/findHome',findHome);
 app.use('/',findHome);
 app.use('/login',login);
+
 app.use('/bookHome',bookHome);
+
+app.get('/login_page',function (req,res) {
+         res.render('login',{hostname:'http://10.200.1.25:3000', error : undefined})
+})
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

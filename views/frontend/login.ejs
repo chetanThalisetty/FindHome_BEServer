@@ -64,14 +64,14 @@
 	                        		</div>
 	                            </div>
 	                            <div class="form-bottom">
-				                    <form role="form" action="" method="post" class="login-form">
+				                    <form role="form" action="http://10.200.1.25:3000/login" method="post" class="login-form">
 				                    	<div class="form-group">
-				                    		<label class="sr-only" for="form-username">Username</label>
-				                        	<input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
+				                    		<label class="sr-only" for="form-username">Email</label>
+				                        	<input type="text" name="email" placeholder="Email..." class="form-username form-control" id="form-username">
 				                        </div>
 				                        <div class="form-group">
 				                        	<label class="sr-only" for="form-password">Password</label>
-				                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+				                        	<input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password">
 				                        </div>
 				                        <button type="submit" class="btn">Sign in!</button>
 										<a href='#'> Forgot Password </a>
@@ -99,7 +99,7 @@
 	                        		</div>
 	                            </div>
 	                            <div class="form-bottom">
-				                    <form role="form" action="" method="post" class="registration-form">
+				                    <form role="form" action="http://10.200.1.25:3000/userSignUp" method="post" class="registration-form">
 				                    	<div class="form-group">
 				                    		<label class="sr-only" for="form-first-name">User name</label>
 				                        	<input type="text" name="form-first-name" placeholder="Username..." class="form-first-name form-control" id="form-first-name">
@@ -107,15 +107,15 @@
 				                        
 				                        <div class="form-group">
 				                        	<label class="sr-only" for="form-email">Email</label>
-				                        	<input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+				                        	<input type="text" name="email" placeholder="Email..." class="form-email form-control" id="form-email">
 				                        </div>
 				                       <div class="form-group">
 				                        	<label class="sr-only" for="form-password">Password</label>
-				                        	<input type="password" name="create-password-1" placeholder="Password..." class="form-password form-control" id="create-password-1">
+				                        	<input type="password" name="password" placeholder="Password..." class="form-password form-control" id="create-password-1">
 				                        </div>
 										<div class="form-group">
 				                        	<label class="sr-only" for="form-password">confirm password</label>
-				                        	<input type="password" name="create-password-2" placeholder="Confirm Password..." class="form-password form-control" id="create-password-2">
+				                        	<input type="password" name="password1" placeholder="Confirm Password..." class="form-password form-control" id="create-password-2">
 				                        </div>
 				                        <button type="submit" class="btn">Sign me up!</button>
 				                    </form>
@@ -127,7 +127,12 @@
                     
                 </div>
             </div>
-            
+			<%  if(error != undefined && error == '1062'){  %>
+					<div class="alert alert-danger">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+						<strong>Failed!</strong> Your account already exists.
+					</div>
+			<% }%>
         </div>
 
        
