@@ -14,6 +14,7 @@ const getHomeInfo = require('./controllers/getHomeInfo');
 const findHome = require('./controllers/findHome');
 const login = require('./controllers/login');
 const bookHome = require('./controllers/bookHome');
+const server_config =require('./config/server_config');
 
 const app = express();
 let urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -49,7 +50,7 @@ app.use('/login',login);
 app.use('/bookHome',bookHome);
 
 app.get('/login_page',function (req,res) {
-         res.render('login',{hostname:'http://10.200.1.25:3000', error : undefined})
+         res.render('login',{host_address :server_config.hosting_server_ip,port:server_config.port_no, error : undefined})
 })
 
 

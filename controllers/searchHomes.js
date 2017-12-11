@@ -3,7 +3,7 @@ const router = express.Router();
 const logger = require('../lib/logger');
 const searchKeys = require('../utils/constants').SEARCH_KEYS;
 const searchModel = require('../models/searchModel');
-
+const server_config =require('../config/server_config');
 
 /**
  * @author Chetan Sai Kumar Thalisetty [tchetan1@umbc.edu]
@@ -46,7 +46,7 @@ router.post('/',function(req, res, next){
     searchModel.getHomes(req,(result) => {
         console.log(JSON.parse(JSON.stringify(result)));
         let message = result.message;
-        res.render('house_response',{data : message});
+        res.render('house_response',{data : message,host_address :server_config.hosting_server_ip,port:server_config.port_no});
     });
 });
 

@@ -4,7 +4,7 @@ const user = require('../models/userInfo');
 const table_info = require('../config/table_info');
 const constants = require('../utils/constants');
 const router = express.Router();
-
+const server_config =require('../config/server_config');
 /**
  * gets the request for User SignUp. Express router helps to seperate the modules.
  * Request body should have
@@ -37,11 +37,11 @@ router.post('/', function(req, res, next){
         //res.send(JSON.stringify(result));
         console.log(result.message);
         if(result.message === constants.response.SUCCESS ){
-            res.render('index',{title: 'Find Home'});
+            res.render('index',{title: 'Find Home',host_address :server_config.hosting_server_ip,port:server_config.port_no});
         }
         else{
             let error_code = result.message.errno;
-            res.render('login',{error : error_code});
+            res.render('login',{error : error_code,host_address :server_config.hosting_server_ip,port:server_config.port_no});
 
         }
     });

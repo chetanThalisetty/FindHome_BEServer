@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const homeModel = require('../models/homeModel');
-
+const server_config =require('../config/server_config');
 /**
  * @author Chetan Sai Kumar Thalisetty [tchetan1@umbc.edu]
  */
@@ -21,8 +21,8 @@ router.get('/',function(req, res, next){
     //     "Access-Control-Allow-Origin": '*'
     // });
     homeModel.getCompleteHouseInfo(req,(result) => {
-        console.log(result);
-        res.render('single_house',{data: result.message[0]})
+        //console.log(result);
+        res.render('single_house',{data: result.message[0],host_address :server_config.hosting_server_ip,port:server_config.port_no})
         //res.send(JSON.stringify(result));
     });
 });
