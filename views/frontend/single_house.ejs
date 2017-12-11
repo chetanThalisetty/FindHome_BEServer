@@ -167,7 +167,16 @@
                         <!--</div>-->
                         <div class="col-sm-3 ">
 
-                            <p><a href="http://<%= host_address %>:<%= port %>/bookHome" class="btn btn-primary btn-lg">Book Now</a></p>
+
+                            <p><a href="http://<%= host_address %>:<%= port %>/bookHome" class="btn btn-primary btn-lg">BOOK NOW</a></p>
+
+                            <!--<form action="/action_page.php" method="post" target="_blank">-->
+                                <!--First name: <input type="text" name="fname" value='Nikhil' hidden>-->
+                                <!--Last name: <input type="text" name="lname" value='Kumar'><br>-->
+
+                                <!--<input type="submit" value="Submit">-->
+                            <!--</form>-->
+
 
                         </div>
                         <div class="row">
@@ -175,9 +184,9 @@
                             <div class="col-sm-3 ">
 
                                 <div class="col-sm-2">
-                                    <img src="images/loc.png" alt="My Image" />
+                                    <img src="images/guest_icon.png" alt="My Image" style="width:35px;height:35px;" />
                                 </div>
-                                <div class="col-sm-offset-6">
+                                <div class="col-sm-offset-3">
                                     <p><%= data.accommodates %> </p>
                                 </div>
 
@@ -185,20 +194,20 @@
                             <div class="col-sm-3 ">
 
                                 <div class="col-sm-2">
-                                    <img src="images/loc.png" alt="My Image" />
+                                    <img src="images/beds_icon.png" alt="My Image" style="width:35px;height:35px;" />
                                 </div>
-                                <div class="col-sm-offset-6">
-                                    <p><%= data.bathrooms %></p>
+                                <div class="col-sm-offset-3">
+                                    <p><%= data.bedrooms %></p>
                                 </div>
 
                             </div>
                             <div class="col-sm-3 ">
 
                                 <div class="col-sm-2">
-                                    <img src="images/loc.png" alt="My Image" />
+                                    <img src="images/bath_icon.png" alt="My Image"   style="width:35px;height:35px;"/>
                                 </div>
-                                <div class="col-sm-offset-6">
-                                    <p><%= data.bedrooms %></p>
+                                <div class="col-sm-offset-3">
+                                    <p><%= data.bathrooms %></p>
                                 </div>
 
                             </div>
@@ -230,9 +239,11 @@
                                 <h4><a>Amenities</a></h4>
                                 <% let amenities = data.amenities.substring(1,data.amenities.length-1);
                                    amenities_array = amenities.split(",");
+                                   
                                    for(let i=0;i<amenities_array.length;i++){
                                          let amenity = amenities_array[i];
                                          if(amenity[0] == "\""){ %>
+
                                                <p><span>&#10148;</span><%=amenity.substring(1,amenity.length-1)%> </p>
                                  <%        }
                                    } %>
@@ -273,6 +284,7 @@
                                     <hr>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 

@@ -68,10 +68,10 @@
 			<div class="container">
 				<div class="nav-header">
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-					<h1 id="fh5co-logo"><a href=""><%= title %></a></h1>
+					<h1 id="fh5co-logo"><a href="/"><%= title %></a></h1>
 					<nav id="fh5co-menu-wrap" role="navigation">
 						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li><a class="active" href="">Home</a></li>
+							<li><a class="active" href="/">Home</a></li>
 							<li><a href="contact.html">ABOUT</a></li>
 						</ul>
 					</nav>
@@ -148,7 +148,7 @@
 							<!-- "http://127.0.0.1:3000/process_get" method = "GET" -->
 							<div class="a-col">
 								<section>
-									<select class="cs-select cs-skin-border" name = "city">
+									<select class="cs-select cs-skin-border" name = "city" required>
 										<option value="" disabled selected>Select Location</option>
 										<option value="Austin">Austin,Texas,USA</option>
 										<option value="Chicago">Chicago,Illinois,UK</option>
@@ -170,13 +170,13 @@
 							<div class="a-col alternate">
 								<div class="input-field">
 									<label for="date-start">Check In</label>
-									<input type="text" class="form-control" id="date-start" name ="check_in"/>
+									<input type="text" class="form-control" id="date-start" name ="check_in" required/>
 								</div>
 							</div>
 							<div class="a-col alternate">
 								<div class="input-field">
 									<label for="date-end">Check Out</label>
-									<input type="text" class="form-control" id="date-end"  name ="check_out"/>
+									<input type="text" class="form-control" id="date-end"  name ="check_out" />
 								</div>
 							</div>
 							<div class="a-col action">
