@@ -25,5 +25,5 @@ module.exports = {
     },
     "database": 'findHome',
     "connectionLimit": 100,
-    "defaultDB" : "AUSTIN"
+    "defaultDB" : "CHICAGOSS"
 };
