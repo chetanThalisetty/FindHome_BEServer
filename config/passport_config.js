@@ -35,12 +35,12 @@ function setUpStrategy(passport){
             console.log('About to check the authentication with '+email+"and password as "+password);
             user.fetchByCols(["*"], tInfo.USER.columnName.email + "='" + email + "'",function(err,rows){
                 if(err || !rows){
-                    cb(null, false);
+                    cb(null, false, {message:'Unknown Error'});
                 }
                 else if(rows.length == 0){
                     logger.log('info','email does not exist in database');
                     console.log('email does not exist in database');
-                    cb(null,false);
+                    cb(null,false,{message:'email does not exist'});
                 }else{
                     // console.log(rows);
                     // console.log(rows[0][tInfo.USER.columnName.password]);
@@ -50,7 +50,7 @@ function setUpStrategy(passport){
                     }else{
                         logger.log('info','Passwords not matched');
                         console.log('Passwords not matched');
-                        cb(null,false);
+                        cb(null,false, {message:'Passwords not matched'});
                     }
                 }
             });

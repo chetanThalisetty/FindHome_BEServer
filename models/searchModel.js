@@ -109,6 +109,8 @@ function getHomes(reqObj, response){
                 response(new responseObj('error', error));
             }else {
                 logger.log('info', 'Success on executing the query' + results.length);
+                // adding user information to the results
+                results.email = reqObj.user.email;
                 response(new responseObj('success', results));
             }
         });
