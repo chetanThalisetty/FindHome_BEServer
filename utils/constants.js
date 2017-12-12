@@ -41,5 +41,6 @@ module.exports = {
     },
     "HOUSEINFOALIAS":"houseTable",
     "HOSTINFOALIAS":"hostTable",
-    "CITYINFOALIAS":"cityTable"
+    "CITYINFOALIAS":"cityTable",
+    "BOOKINGINFOALIAS":"bookingTable"
 };

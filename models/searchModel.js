@@ -9,6 +9,7 @@ function getHomes(reqObj, response){
     const houseTAlias = constants.HOUSEINFOALIAS;
     const hostTAlias = constants.HOSTINFOALIAS;
     const cityTAlias = constants.CITYINFOALIAS;
+    const bookingTAlias = constants.BOOKINGINFOALIAS;
 
     const check_in_date =reqObj.body.check_in;
     const check_out_date = reqObj.body.check_out;
@@ -52,6 +53,7 @@ function getHomes(reqObj, response){
         const bedRoomCountStr = generateBedroomCountStr(bedroom_count) + " ";
         const bathRoomCountStr = generateBathroomCountStr(bathroom_count) + " ";
         const superHostStr = generateSuperHostStr(shouldBeSuperHost);
+        const dataCompareStr = generateDataCompareStr(start_str, end_str);
 
         // let queryString = "SELECT houseId,houseName,housePrice,houseSummary " +
         //                     "FROM dbName.houseTableName AS houseTableAlias, dbName.hostTableName AS hostTableAlias, dbName.cityTableName AS cityTableAlias " +
@@ -65,6 +67,7 @@ function getHomes(reqObj, response){
             "FROM dbName.houseTableName AS houseTableAlias  " +
             "INNER JOIN dbName.hostTableName AS hostTableAlias ON houseTableAlias.houseHostID = hostTableAlias.hostId " +
             "INNER JOIN dbName.cityTableName AS cityTableAlias ON houseTableAlias.houseCityID = cityTableAlias.cityId " +
+            "LEFT JOIN dbName.bookingTableName AS bookingTableAlias ON houseTableAlias.houseHouseID = bookingTableAlias.bookingHouseId " +
             "WHERE " + cityCompareStr +
             guestCountStr +
             bedCountStr +
@@ -73,6 +76,7 @@ function getHomes(reqObj, response){
             homeTypeStr +
             priceTypeStr +
             superHostStr +
+            dataCompareStr +
             " LIMIT 100";
 
         queryString = queryString.replace(/dbName/g,db_config.database);
@@ -86,6 +90,10 @@ function getHomes(reqObj, response){
         queryString = queryString.replace('hostId',tInfo.HOST.columnName.ID);
         queryString = queryString.replace('houseCityID',tInfo.HOUSE.columnName.CITY_ID);
         queryString = queryString.replace('cityId',tInfo.CITY.columnName.ID);
+        queryString = queryString.replace(/bookingTableAlias/g,bookingTAlias);
+        queryString = queryString.replace('bookingTableName',tInfo.BOOKING.tableName);
+        queryString = queryString.replace('houseHouseID',tInfo.HOUSE.columnName.ID);
+        queryString = queryString.replace('bookingHouseId',tInfo.BOOKING.columnName.HOUSE_ID);
         queryString = queryString.replace('houseId',houseTAlias + "." + tInfo.HOUSE.columnName.ID);
         queryString = queryString.replace('houseName',houseTAlias + "." + tInfo.HOUSE.columnName.NAME);
         queryString = queryString.replace('housePrice',houseTAlias + "." + tInfo.HOUSE.columnName.PRICE);
@@ -117,6 +125,14 @@ function getHomes(reqObj, response){
         //TODO throw error
         response(new responseObj('error', "Check in date is not provided"));
     }
+}
+function generateDataCompareStr(startStr, endStr){
+    let resultStr = " AND (";
+    const tColumnName = constants.BOOKINGINFOALIAS + "."+ tInfo.BOOKING.columnName.END_DATE;
+    const tColumnName_houseID = constants.BOOKINGINFOALIAS + "." + tInfo.BOOKING.columnName.HOUSE_ID;
+
+    resultStr = resultStr + " '" + startStr + "' > " +tColumnName + " OR " + tColumnName_houseID + "IS NULL) ";
+    return resultStr;
 }
 
 function generateBathroomCountStr(bathroomCount){
