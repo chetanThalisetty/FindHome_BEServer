@@ -80,9 +80,15 @@
                         <h1 id="fh5co-logo"><a href="/">FIND HOME</a></h1>
                         <nav id="fh5co-menu-wrap" role="navigation">
                             <ul class="sf-menu" id="fh5co-primary-menu">
-                                <li><a href="/">Home</a></li>
+                                <li><a class="active" href="/">Home</a></li>
+                                <li><a href="contact.html">About</a></li>
+                                <li><a href="#">
+                                        <span class="glyphicon glyphicon-user"></span>Nikhil
 
-                                <li><a href="contact.html">Contact</a></li>
+                                    </a>
+                                    <ul class="fh5co-sub-menu">
+                                        <li><h3><a href="http://<%= host_address %>:<%= port %>/login_page">LOG OUT</a></h3><li>
+                                    </ul></li>
                             </ul>
                         </nav>
                     </div>
@@ -111,7 +117,9 @@
                 <div class="row">
 
 
-                    <% for(var i=0; i < 100; i++) { %>
+                    <%
+                    if(Object.keys(data).length!=0){
+                    for(var i=0; i < 100; i++) { %>
                     <div class="col-md-4">
                         <div class="hotel-content">
                             <% let random_image= 'house_image_'+ (Math.floor(Math.random() *10) + 1) %>
@@ -132,7 +140,13 @@
                             </div>
                         </div>
                     </div>
-                    <% } %>
+                    <% }} else{ %>
+                           <div class="row">
+                               <h3><a>
+                                   No Search Results
+                              </a> </h3>
+                               </div>
+                    <%}%>
 
                 </div>
             </div>

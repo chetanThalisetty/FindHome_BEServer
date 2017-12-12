@@ -84,9 +84,15 @@
 					<h1 id="fh5co-logo"><a href="/">Find Home</a></h1>
 					<nav id="fh5co-menu-wrap" role="navigation">
 						<ul class="sf-menu" id="fh5co-primary-menu">
-							<li><a href="/">Home</a></li>
+							<li><a class="active" href="/">Home</a></li>
+							<li><a href="contact.html">About</a></li>
+							<li><a href="#">
+								<span class="glyphicon glyphicon-user"></span>Nikhil
 
-							<li><a class="active" href="contact.html">Contact</a></li>
+							</a>
+								<ul class="fh5co-sub-menu">
+									<li><h3><a href="http://<%= host_address %>:<%= port %>/login_page">LOG OUT</a></h3><li>
+								</ul></li>
 						</ul>
 					</nav>
 				</div>
