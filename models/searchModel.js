@@ -131,7 +131,7 @@ function generateDataCompareStr(startStr, endStr){
     const tColumnName = constants.BOOKINGINFOALIAS + "."+ tInfo.BOOKING.columnName.END_DATE;
     const tColumnName_houseID = constants.BOOKINGINFOALIAS + "." + tInfo.BOOKING.columnName.HOUSE_ID;
 
-    resultStr = resultStr + " '" + startStr + "' > " +tColumnName + " OR " + tColumnName_houseID + "IS NULL) ";
+    resultStr = resultStr + " '" + startStr + "' > " +tColumnName + " OR " + tColumnName_houseID + " IS NULL) ";
     return resultStr;
 }
 
