@@ -21,8 +21,8 @@ router.get('/',function(req, res, next){
     //     "Access-Control-Allow-Origin": '*'
     // });
     homeModel.getCompleteHouseInfo(req,(result) => {
-        //console.log(result);
-        res.render('single_house',{data: result.message[0],host_address :server_config.hosting_server_ip,port:server_config.port_no})
+        console.log(result.message[1]);
+        res.render('single_house',{email:result.message[1],data: result.message[0],host_address :server_config.hosting_server_ip,port:server_config.port_no})
         //res.send(JSON.stringify(result));
     });
 });

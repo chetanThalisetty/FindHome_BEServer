@@ -52,7 +52,7 @@ function getHomeInfo(reqObj, response){
                 logger.log('error', 'Error on Query ' + error.message);
                 response(new responseObj('error', error));
             }else {
-                results.email = reqObj.user.email;
+                results.push(reqObj.user.email);
                 logger.log('info', 'Success on executing the query' + results.length);
                 response(new responseObj('success', results));
             }

@@ -123,7 +123,8 @@
                     
                 </div>
             </div>
-			<%  if(error != undefined && error == '1062'){  %>
+			<% console.log(error) ;
+			if(error != undefined && error == '1062'){  %>
 					<div class="alert alert-danger">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 						<strong>Failed!</strong> Your account already exists.
@@ -134,7 +135,13 @@
 				   <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 				   <strong>Success! Your account is created.</strong> Please login with your details.
 			  </div>
+			<%} else if(error != undefined && error != 'null'){%>
+			<div class="alert alert-danger">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+				<strong>Failed!</strong> <%= error %>
+			</div>
 			<%}%>
+
         </div>
 
        

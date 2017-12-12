@@ -42,12 +42,14 @@ function bookHome(reqObj, response){
         connectionObj.getConnection(function(error,connection){
             connection.beginTransaction(function(err){
                     if (err){
+                        err.email = reqObj.user.email;
                         response(new responseObj('error', err));
                     }
 
                     connectionObj.query(queryStr, function (error, results, fields) {
                         if(error) {
                             return connection.rollback(function(){
+                                error.email = reqObj.user.email;
                                 logger.log('error', 'Error on Query ' + error.message);
                                 response(new responseObj('error', error));
                             });
@@ -55,7 +57,9 @@ function bookHome(reqObj, response){
                             connection.commit(function(err){
                                 if (err) {
                                     return connection.rollback(function() {
-                                        logger.log('error', 'Error on Query ' + error.message);
+
+                                        error.email = reqObj.user.email;
+                                        logger.log('error', 'Error on Query ' + error);
                                         response(new responseObj('error', error));
                                     });
                                 }
