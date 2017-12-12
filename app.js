@@ -55,7 +55,6 @@ app.get('/login_page',function (req,res) {
     if (!req.session.views) {
         req.session.views = {};
     }
-    logger.log("info", req);
     res.render('login',{host_address :server_config.hosting_server_ip,port:server_config.port_no, error : undefined});
 });
 
