@@ -128,7 +128,13 @@
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 						<strong>Failed!</strong> Your account already exists.
 					</div>
-			<% }%>
+			<% }
+			else if(error == 'success'){%>
+			   <div class="alert alert-success">
+				   <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+				   <strong>Success! Your account is created.</strong> Please login with your details.
+			  </div>
+			<%}%>
         </div>
 
        

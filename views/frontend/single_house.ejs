@@ -229,6 +229,7 @@
                         <div class="row">
                             <hr>
                         </div>
+                        <% if(data.summary != 'null'){%>
                         <div class=row">
 
                             <div class="col-lg-12">
@@ -237,7 +238,9 @@
                                 <p><%= data.summary %></p>
                                 <hr>
                             </div>
+
                         </div>
+                        <%}%>
                         <% if(data.amenities!="{}"){%>
                         <div class=row">
 
@@ -263,7 +266,7 @@
 
 
 
-
+                            <% if(data.cancellation_policy !=null){ %>
                             <div class=row">
 
                                 <div class="col-lg-12">
@@ -273,6 +276,8 @@
                                     <hr>
                                 </div>
                             </div>
+                        <%}%>
+                          <% if(data.house_rules !=null) {%>
                             <div class=row">
 
                                 <div class="col-lg-12">
@@ -282,6 +287,8 @@
                                     <hr>
                                 </div>
                             </div>
+                        <%}%>
+                        <% if(data.host_name!=null){%>
                             <div class=row">
                                 <div class="col-lg-12">
 
@@ -290,6 +297,7 @@
                                     <hr>
                                 </div>
                             </div>
+                        <%}%>
 
                         </div>
                     </div>
