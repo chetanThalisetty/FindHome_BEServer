@@ -36,9 +36,8 @@ function setUpStrategy(passport){
             user.fetchByCols(["*"], tInfo.USER.columnName.email + "='" + email + "'",function(err,rows){
                 if(err || !rows){
                     cb(null, false);
-                    return
                 }
-                if(rows.length == 0){
+                else if(rows.length == 0){
                     logger.log('info','email does not exist in database');
                     console.log('email does not exist in database');
                     cb(null,false);
